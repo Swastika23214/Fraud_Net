@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FraudNet — Call Pattern Analyser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <span class="logo-icon">⬡</span>
+    <span class="logo-text">FRAUDNET</span>
+    <span class="logo-sub">CDR Analysis System</span>
+  </div>
+  <div class="header-status">
+    <span class="pulse-dot"></span>
+    <span id="status-text">CONNECTING...</span>
+  </div>
+</header>
+
+<!-- Search -->
+<section class="search-bar">
+  <div class="search-inner">
+    <input type="text" id="search-input" maxlength="10" placeholder="Enter 10-digit number to check..." oninput="this.value=this.value.replace(/\D/g,'')">
+    <button id="search-btn" onclick="lookupNumber()">Check number</button>
+  </div>
+  <div id="search-result" class="search-result" style="display:none"></div>
+</section>
+
+<!-- Summary Cards -->
+<section class="summary-grid" id="summary">
+  <div class="card stat-card" id="card-total">
+    <div class="stat-label">RECORDS ANALYSED</div>
+    <div class="stat-value" id="stat-total">—</div>
+    <div class="stat-bar"><div class="stat-fill fill-blue" style="width:100%"></div></div>
+  </div>
+  <div class="card stat-card" id="card-blacklist">
+    <div class="stat-label">BLACKLIST HITS</div>
+    <div class="stat-value" id="stat-blacklist">—</div>
+    <div class="stat-bar"><div class="stat-fill fill-amber" id="bar-blacklist"></div></div>
+  </div>
+  <div class="card stat-card" id="card-suspicious">
+    <div class="stat-label">SUSPICIOUS CALLERS</div>
+    <div class="stat-value" id="stat-suspicious">—</div>
+    <div class="stat-bar"><div class="stat-fill fill-red" id="bar-suspicious"></div></div>
+  </div>
+  <div class="card stat-card" id="card-rings">
+    <div class="stat-label">FRAUD RINGS</div>
+    <div class="stat-value" id="stat-rings">—</div>
+    <div class="stat-bar"><div class="stat-fill fill-red" id="bar-rings"></div></div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<main>
+
+  <!-- Suspicious Callers Table -->
+  <section class="card section-card">
+    <div class="section-header">
+      <h2>SUSPICIOUS CALLERS <span class="tag tag-red">RANKED BY SCORE</span></h2>
+      <span class="section-note">Sorted by merge sort — M5</span>
+    </div>
+    <div class="table-wrap">
+      <table id="suspicious-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>CALLER ID</th>
+            <th>SCORE</th>
+            <th>CALLS</th>
+            <th>AVG DUR</th>
+            <th>UNIQUE RECV</th>
+            <th>VIOLATIONS</th>
+          </tr>
+        </thead>
+        <tbody id="suspicious-tbody">
+          <tr><td colspan="7" class="loading-cell">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Fraud Rings -->
+  <section class="card section-card">
+    <div class="section-header">
+      <h2>FRAUD RINGS <span class="tag tag-amber">CYCLE DETECTION — M4</span></h2>
+      <span class="section-note">DFS with color marking on call graph</span>
+    </div>
+    <div id="rings-container">
+      <div class="loading-cell">Loading...</div>
+    </div>
+  </section>
+
+  <!-- CDR Sample -->
+  <section class="card section-card">
+    <div class="section-header">
+      <h2>CDR RECORDS <span class="tag tag-blue">SAMPLE — 20 ROWS</span></h2>
+      <span class="section-note">Raw call detail records from SQLite</span>
+    </div>
+    <div class="table-wrap">
+      <table id="cdr-table">
+        <thead>
+          <tr>
+            <th>CALLER ID</th>
+            <th>RECEIVER ID</th>
+            <th>DURATION</th>
+            <th>TIMESTAMP</th>
+          </tr>
+        </thead>
+        <tbody id="cdr-tbody">
+          <tr><td colspan="4" class="loading-cell">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>FraudNet · DAA-IV-T175 · Design and Analysis of Algorithms</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
