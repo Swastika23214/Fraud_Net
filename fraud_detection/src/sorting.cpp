@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>   // for file writing
 using namespace std;
 
 // Structure for storing suspicious data
@@ -39,15 +40,35 @@ void mergeSort(vector<FraudRecord>& arr, int left, int right) {
     merge(arr, left, mid, right);
 }
 
-// Function to display sorted results
-void display(vector<FraudRecord>& arr) {
-    cout << "\n--- Ranked Suspicious Numbers ---\n";
-    for (auto &x : arr) {
-        cout << "Number: " << x.number << " | Score: " << x.score << endl;
-    }
+// Function to assign risk level
+string getRisk(int score) {
+    if (score > 85) return "High";
+    else if (score > 75) return "Medium";
+    else return "Low";
 }
 
-// Test main (you can integrate later)
+// Function to display + save results
+void display(vector<FraudRecord>& arr) {
+    ofstream file("output.txt");  // file for UI
+
+    cout << "\n--- Ranked Suspicious Numbers ---\n";
+
+    for (auto &x : arr) {
+        string risk = getRisk(x.score);
+
+        // Console output
+        cout << "Number: " << x.number 
+             << " | Score: " << x.score 
+             << " | Risk: " << risk << endl;
+
+        // File output (for HTML)
+        file << x.number << " " << x.score << " " << risk << endl;
+    }
+
+    file.close();
+}
+
+// Test main (replace later with real data)
 int main() {
     vector<FraudRecord> data = {
         {"9991110001", 90},
