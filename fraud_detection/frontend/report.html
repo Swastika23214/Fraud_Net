@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Fraud Detection Report</title>
+
     <style>
         body {
             font-family: Arial;
@@ -35,6 +36,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <h1>🚨 Fraud Detection Report</h1>
@@ -46,25 +48,51 @@
         <th>Risk Level</th>
     </tr>
 
+    <!-- Row 1 -->
     <tr>
-        <td>9991110001</td>
-        <td>90</td>
-        <td>High</td>
+        <td id="num1"></td>
+        <td id="score1"></td>
+        <td id="risk1"></td>
     </tr>
 
+    <!-- Row 2 -->
     <tr>
-        <td>7773330003</td>
-        <td>85</td>
-        <td>Medium</td>
+        <td id="num2"></td>
+        <td id="score2"></td>
+        <td id="risk2"></td>
     </tr>
 
+    <!-- Row 3 -->
     <tr>
-        <td>8882220002</td>
-        <td>75</td>
-        <td>Low</td>
+        <td id="num3"></td>
+        <td id="score3"></td>
+        <td id="risk3"></td>
     </tr>
 
 </table>
+
+<script>
+let data = [
+    {number: "9991110001", score: 90, risk: "High"},
+    {number: "7773330003", score: 85, risk: "Medium"},
+    {number: "8882220002", score: 75, risk: "Low"}
+];
+
+// Row 1
+document.getElementById("num1").innerText = data[0].number;
+document.getElementById("score1").innerText = data[0].score;
+document.getElementById("risk1").innerText = data[0].risk;
+
+// Row 2
+document.getElementById("num2").innerText = data[1].number;
+document.getElementById("score2").innerText = data[1].score;
+document.getElementById("risk2").innerText = data[1].risk;
+
+// Row 3
+document.getElementById("num3").innerText = data[2].number;
+document.getElementById("score3").innerText = data[2].score;
+document.getElementById("risk3").innerText = data[2].risk;
+</script>
 
 </body>
 </html>
