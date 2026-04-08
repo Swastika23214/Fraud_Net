@@ -1,15 +1,13 @@
 #include <iostream>
 #include <vector>
-#include <fstream>   // for file writing
+#include <fstream>   
 using namespace std;
 
-// Structure for storing suspicious data
 struct FraudRecord {
     string number;
     int score;
 };
 
-// Merge function
 void merge(vector<FraudRecord>& arr, int left, int mid, int right) {
     vector<FraudRecord> temp;
     int i = left, j = mid + 1;
@@ -30,7 +28,6 @@ void merge(vector<FraudRecord>& arr, int left, int mid, int right) {
     }
 }
 
-// Merge Sort
 void mergeSort(vector<FraudRecord>& arr, int left, int right) {
     if (left >= right) return;
 
@@ -40,14 +37,14 @@ void mergeSort(vector<FraudRecord>& arr, int left, int right) {
     merge(arr, left, mid, right);
 }
 
-// Function to assign risk level
+
 string getRisk(int score) {
     if (score > 85) return "High";
     else if (score > 75) return "Medium";
     else return "Low";
 }
 
-// Function to display + save results
+
 void display(vector<FraudRecord>& arr) {
     ofstream file("output.txt");  // file for UI
 
@@ -56,7 +53,7 @@ void display(vector<FraudRecord>& arr) {
     for (auto &x : arr) {
         string risk = getRisk(x.score);
 
-        // Console output
+        
         cout << "Number: " << x.number 
              << " | Score: " << x.score 
              << " | Risk: " << risk << endl;
@@ -68,7 +65,7 @@ void display(vector<FraudRecord>& arr) {
     file.close();
 }
 
-// Test main (replace later with real data)
+
 int main() {
     vector<FraudRecord> data = {
         {"9991110001", 90},
