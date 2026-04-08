@@ -1,22 +1,7 @@
-// ============================================================
-// MODULE 5 — Sorting & Ranking
-//
-// Implements merge sort to rank suspicious callers by:
-//   Primary   : suspicion_score (descending)
-//   Secondary : total_calls (descending, tiebreaker)
-//
-// Merge Sort chosen over quicksort for guaranteed O(n log n)
-// worst case — important for predictable detection performance.
-//
-// Time Complexity : O(n log n)
-// Space Complexity: O(n) — temporary arrays during merge
-// ============================================================
-
 #include "../include/m5_sorting.h"
 #include <iostream>
 using namespace std;
 
-// ── Merge two sorted halves ────────────────────────────────────
 static void merge(vector<SuspiciousCaller>& arr, int left, int mid, int right) {
     vector<SuspiciousCaller> L(arr.begin() + left,  arr.begin() + mid + 1);
     vector<SuspiciousCaller> R(arr.begin() + mid + 1, arr.begin() + right + 1);
