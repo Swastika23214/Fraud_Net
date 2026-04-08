@@ -1,27 +1,3 @@
-// ============================================================
-// MAIN — Fraud Detection Pipeline + HTTP Server
-//
-// Flow:
-//   1. Load CDR from data/cdr_input.csv          (M1)
-//   2. Blacklist & prefix scan                   (M2)
-//   3. Greedy behavioral rule engine             (M3)
-//   4. Graph construction & fraud ring detection (M4)
-//   5. Merge sort ranking                        (M5)
-//   6. Persist all results to SQLite             (M6)
-//   7. Serve JSON endpoints for frontend         (HTTP)
-//
-// Compile:
-//   g++ -std=c++17 -o fraud_detector \
-//       src/main.cpp src/m1_ingestion.cpp src/m2_blacklist.cpp \
-//       src/m3_rules.cpp src/m4_graph.cpp src/m5_sorting.cpp \
-//       src/m6_database.cpp \
-//       -Iinclude -lsqlite3
-//
-// Run:
-//   ./fraud_detector
-//   Then open frontend/index.html in your browser
-// ============================================================
-
 #include "m1_ingestion.h"
 #include "m2_blacklist.h"
 #include "m3_rules.h"
@@ -42,10 +18,9 @@ int main() {
     cout << "   FRAUD DETECTION SYSTEM\n";
     cout << "========================================================\n\n";
 
-    // ── M6: Init database ─────────────────────────────────────
+    
     dbInit();
 
-    // ── M1: Load CDR dataset ──────────────────────────────────
     vector<CDRRecord> records;
     try {
         records = loadCDR("data/cdr_input.csv");
@@ -55,26 +30,18 @@ int main() {
     }
     dbStoreCDR(records);
 
-    // ── M2: Blacklist scan ────────────────────────────────────
     cout << "\n[Pipeline] Running M2: Blacklist scan...\n";
     auto blacklistHits = runBlacklistScan(records);
     dbStoreBlacklistHits(blacklistHits);
-
-    // ── M3: Rule engine ───────────────────────────────────────
     cout << "\n[Pipeline] Running M3: Rule engine...\n";
     auto suspicious = runRuleEngine(records);
-
-    // ── M5: Sort/rank ─────────────────────────────────────────
     cout << "\n[Pipeline] Running M5: Ranking...\n";
     suspicious = rankCallers(suspicious);
     dbStoreSuspiciousCallers(suspicious);
-
-    // ── M4: Fraud ring detection ──────────────────────────────
     cout << "\n[Pipeline] Running M4: Fraud ring detection...\n";
     auto rings = detectFraudRings(records);
     dbStoreFraudRings(rings);
 
-    // ── Summary ───────────────────────────────────────────────
     cout << "\n========================================================\n";
     cout << "   RESULTS\n";
     cout << "========================================================\n";
@@ -84,10 +51,8 @@ int main() {
     cout << "Fraud rings detected : " << rings.size()         << "\n";
     cout << "========================================================\n";
 
-    // ── HTTP Server ───────────────────────────────────────────
     httplib::Server svr;
 
-    // CORS headers for all responses
     auto cors = [](httplib::Response& res) {
         res.set_header("Access-Control-Allow-Origin", "*");
         res.set_header("Access-Control-Allow-Headers", "Content-Type");
@@ -113,7 +78,6 @@ int main() {
         cors(res);
     });
 
-    // M7: Single number lookup
     svr.Get("/api/lookup", [&](const httplib::Request& req, httplib::Response& res) {
         string number = req.get_param_value("number");
         if (number.empty() || number.size() != 10) {
@@ -142,7 +106,6 @@ int main() {
         cors(res);
     });
 
-    // Serve frontend static files
     svr.set_mount_point("/", "./frontend");
 
     cout << "\n[Server] Running at http://localhost:8080\n";
