@@ -1,21 +1,7 @@
-// ============================================================
-// MODULE 2 — Blacklist & Prefix Detection
-//
-// Two-layer detection:
-//   Layer 1 — Exact blacklist match : O(1) via unordered_set
-//   Layer 2 — Prefix scam detection : O(k) via Trie
-//             k = length of prefix checked
-//
-// Space Complexity: O(b + p*k)
-//   b = blacklist entries, p = prefixes, k = avg prefix length
-// ============================================================
-
 #include "../include/m2_blacklist.h"
 #include <unordered_set>
 #include <iostream>
 using namespace std;
-
-// ── Trie ──────────────────────────────────────────────────────
 struct TrieNode {
     TrieNode* ch[10];
     bool      isEnd;
