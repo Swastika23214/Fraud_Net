@@ -1,31 +1,30 @@
-/* ── Reset & Base ──────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0a0c0f;
-  --bg2:       #111418;
-  --bg3:       #181c22;
-  --border:    #232830;
-  --border2:   #2e3540;
-  --text:      #c8d0dc;
-  --text2:     #7a8494;
-  --text3:     #454e5c;
-  --accent:    #00d4ff;
-  --red:       #ff4560;
-  --amber:     #ffa726;
-  --green:     #26e07f;
-  --blue:      #4488ff;
-  --font-mono: 'Share Tech Mono', monospace;
-  --font-body: 'Barlow', sans-serif;
+  --bg:        #83a8d9;
+  --bg2:       #f9fcfecd;
+  --bg3:       #f1eac2;
+  --border:    #0c0d0d;
+  --border2:   #0e0e0f;
+  --text:      #151516;
+  --text2:     #131414;
+  --text3:     #00060d;
+  --accent:    hsl(283, 42%, 46%);
+  --red:       #ef3434;
+  --amber:     #3a1010;
+  --green:     #21b441;
+  --blue:      #2644b0;
+  --font-body: 'Segoe UI', 'Inter', sans-serif;
+  --font-mono: 'Courier New', 'JetBrains Mono', monospace;
 }
 
-html { font-size: 14px; }
+html { font-size: 16px; }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   min-height: 100vh;
   padding-bottom: 3rem;
 }
@@ -66,9 +65,9 @@ body::before {
   border-radius: 3px;
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: .85rem;
+  font-size: .9rem;
   padding: .5rem .75rem;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   outline: none;
   transition: border-color .2s;
 }
@@ -82,10 +81,10 @@ body::before {
   border: none;
   border-radius: 3px;
   font-family: var(--font-mono);
-  font-size: .75rem;
+  font-size: .82rem;
   padding: .5rem 1rem;
   cursor: pointer;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   white-space: nowrap;
   transition: opacity .2s;
 }
@@ -108,7 +107,7 @@ body::before {
   justify-content: space-between;
   padding: .6rem .9rem;
   font-family: var(--font-mono);
-  font-size: .75rem;
+  font-size: .82rem;
 }
 
 .sr-header.not-found { background: var(--bg3); border-bottom: 1px solid var(--border2); }
@@ -118,8 +117,9 @@ body::before {
 .sr-header.clean     { background: rgba(38,224,127,.08); border-bottom: 1px solid rgba(38,224,127,.2); }
 
 .sr-verdict {
-  font-size: .8rem;
-  letter-spacing: .1em;
+  font-size: .88rem;
+  letter-spacing: .08em;
+  font-weight: 600;
 }
 .sr-verdict.dangerous { color: var(--red); }
 .sr-verdict.suspicious{ color: var(--amber); }
@@ -136,7 +136,7 @@ body::before {
 .sr-row {
   display: flex;
   justify-content: space-between;
-  font-size: .75rem;
+  font-size: .82rem;
   padding: .2rem 0;
   border-bottom: 1px solid var(--border);
 }
@@ -151,7 +151,7 @@ body::before {
 
 .sr-ring {
   grid-column: 1 / -1;
-  font-size: .72rem;
+  font-size: .8rem;
   color: var(--amber);
   font-family: var(--font-mono);
   padding: .3rem 0 0;
@@ -178,25 +178,28 @@ header {
 }
 
 .logo-icon {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--accent);
   line-height: 1;
 }
 
 .logo-text {
   font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   color: var(--accent);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .logo-sub {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--text3);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   border-left: 1px solid var(--border2);
   padding-left: 0.75rem;
+  font-weight: 500;
 }
 
 .header-status {
@@ -204,9 +207,9 @@ header {
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--text2);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 .pulse-dot {
@@ -257,11 +260,13 @@ header {
 .stat-card:last-child::after   { background: var(--red); }
 
 .stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   color: var(--text3);
   margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .stat-value {
@@ -271,6 +276,7 @@ header {
   line-height: 1;
   margin-bottom: 0.75rem;
   transition: color 0.3s;
+  font-weight: 700;
 }
 
 .stat-bar {
@@ -322,32 +328,33 @@ main {
 }
 
 .section-header h2 {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
   color: var(--text);
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  text-transform: uppercase;
 }
 
 .section-note {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text3);
   font-family: var(--font-mono);
 }
 
 /* ── Tags ─────────────────────────────────────────────────── */
 .tag {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   padding: 2px 6px;
   border-radius: 2px;
-  letter-spacing: 0.08em;
-  font-weight: 400;
+  letter-spacing: 0.06em;
+  font-weight: 600;
 }
 
-.tag-red   { background: rgba(255,69,96,0.15);  color: var(--red);   border: 1px solid rgba(255,69,96,0.3); }
+.tag-red   { background: rgba(255, 248, 249, 0.15);  color: var(--red);   border: 1px solid rgba(255,69,96,0.3); }
 .tag-amber { background: rgba(255,167,38,0.15); color: var(--amber); border: 1px solid rgba(255,167,38,0.3); }
 .tag-blue  { background: rgba(68,136,255,0.15); color: var(--blue);  border: 1px solid rgba(68,136,255,0.3); }
 
@@ -359,18 +366,20 @@ main {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
 }
 
 thead th {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
   color: var(--text3);
   text-align: left;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 tbody tr {
@@ -384,29 +393,29 @@ tbody tr:hover { background: var(--bg3); }
 tbody td {
   padding: 0.6rem 0.75rem;
   color: var(--text2);
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   white-space: nowrap;
 }
 
 tbody td:first-child {
   font-family: var(--font-mono);
   color: var(--text3);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
 }
 
 .caller-id {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
 }
 
-.score-high { color: var(--red);   font-family: var(--font-mono); font-weight: 600; }
-.score-mid  { color: var(--amber); font-family: var(--font-mono); }
+.score-high { color: var(--red);   font-family: var(--font-mono); font-weight: 700; }
+.score-mid  { color: var(--amber); font-family: var(--font-mono); font-weight: 600; }
 .score-low  { color: var(--green); font-family: var(--font-mono); }
 
 .violation-badge {
   display: inline-block;
-  font-size: 0.58rem;
+  font-size: 0.62rem;
   padding: 2px 5px;
   border-radius: 2px;
   background: rgba(255,69,96,0.1);
@@ -416,6 +425,7 @@ tbody td:first-child {
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .loading-cell {
@@ -423,8 +433,8 @@ tbody td:first-child {
   padding: 2rem !important;
   color: var(--text3) !important;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
 }
 
 /* ── Fraud Ring Cards ─────────────────────────────────────── */
@@ -453,15 +463,16 @@ tbody td:first-child {
 
 .ring-id {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: var(--amber);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   min-width: 60px;
+  font-weight: 600;
 }
 
 .ring-members {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--text);
   flex: 1;
   line-height: 1.6;
@@ -478,7 +489,7 @@ tbody td:first-child {
 
 .ring-size {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: var(--text3);
   white-space: nowrap;
 }
@@ -490,7 +501,7 @@ footer {
   align-items: center;
   padding: 1rem 2rem;
   border-top: 1px solid var(--border);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text3);
   font-family: var(--font-mono);
   letter-spacing: 0.06em;
